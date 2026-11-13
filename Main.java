@@ -1,19 +1,24 @@
-import java.io.*;
-import java.util.Arrays;
-
 public class Main {
-    public static void main(String[] a) throws IOException {
-        String line = new BufferedReader(new InputStreamReader(System.in)).readLine();
+    static int divide(int a, int b) {
+        // Reject the b == 0 case with a throw STATEMENT:
+        //     throw new SomeException("message");
+        // (`throws` belongs in a method signature; it is not a statement.)
+        if (b == 0) {
+            throw new ArithmeticException("divide by zero");
+        }
+        return a / b;
+    }
 
-        // A String[] has no .stream() method; go through Arrays.stream:
-        //     Arrays.stream(line.split(" ")).mapToInt(Integer::parseInt)
-        // Add the pipeline stages you need, finish with a terminal op, and
-        // PRINT the result — a pipeline whose value is never printed
-        // produces no output at all.
-        int result = Arrays.stream(line.split(" ")).mapToInt(Integer::parseInt)
-            .filter(n -> n % 2 == 0)
-            .map(n -> n * n)
-            .sum();
-        System.out.println(result);
+    public static void main(String[] args) throws Exception {
+        java.util.Scanner sc = new java.util.Scanner(System.in);
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        try {
+            // print "result: " followed by divide(a, b)
+            System.out.println("result: " + divide(a, b));
+        } catch (ArithmeticException e) {
+            // print "error: " followed by the exception message
+            System.out.println("error: " + e.getMessage());
+        }
     }
 }
