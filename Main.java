@@ -1,22 +1,15 @@
 import java.io.*;
-import java.util.*;
+import java.util.function.*;
 
 public class Main {
     public static void main(String[] a) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String line = br.readLine();
-        String[] words = line.split(" ");
-        
-        // 1. count each word into a Map<String, Integer>
-        Map<String, Integer> wordCount = new TreeMap<>();
-        for (String word : words) {
-            wordCount.put(word, wordCount.getOrDefault(word, 0) + 1);
-        }
-        // 2. iterate the entries in alphabetical key order
-        //    (walk a map with: for (Map.Entry<String, Integer> e : map.entrySet()))
-        for (Map.Entry<String, Integer> e : wordCount.entrySet()) {
-            // 3. print one line per word: "<word>: <count>"
-            System.out.println(e.getKey() + ": " + e.getValue());
-        }
+        int n = Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine());
+
+        // A lambda shares this method's scope, so its parameter may NOT be
+        // called n — that is 'variable n is already defined'. Use x.
+        // Function<Integer, Integer> f = x -> /* your expression */;
+        // then print the result of applying f to n
+        Function<Integer, Integer> squarePlus = x -> x * x + 1;
+        System.out.println(squarePlus.apply(n));
     }
 }
