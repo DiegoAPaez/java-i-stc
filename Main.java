@@ -1,15 +1,19 @@
 import java.io.*;
-import java.util.function.*;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] a) throws IOException {
-        int n = Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine());
+        String line = new BufferedReader(new InputStreamReader(System.in)).readLine();
 
-        // A lambda shares this method's scope, so its parameter may NOT be
-        // called n — that is 'variable n is already defined'. Use x.
-        // Function<Integer, Integer> f = x -> /* your expression */;
-        // then print the result of applying f to n
-        Function<Integer, Integer> squarePlus = x -> x * x + 1;
-        System.out.println(squarePlus.apply(n));
+        // A String[] has no .stream() method; go through Arrays.stream:
+        //     Arrays.stream(line.split(" ")).mapToInt(Integer::parseInt)
+        // Add the pipeline stages you need, finish with a terminal op, and
+        // PRINT the result — a pipeline whose value is never printed
+        // produces no output at all.
+        int result = Arrays.stream(line.split(" ")).mapToInt(Integer::parseInt)
+            .filter(n -> n % 2 == 0)
+            .map(n -> n * n)
+            .sum();
+        System.out.println(result);
     }
 }
