@@ -2,17 +2,18 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static Optional<Integer> safeParse(String s) {
-        try {
-            return Optional.of(Integer.valueOf(s));
-        } catch (NumberFormatException e) {
-            return Optional.empty();
-        }
-    }
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        List<String> words = new ArrayList<>();
+        for (int i = 0; i < n; i++) words.add(br.readLine());
 
-    public static void main(String[] a) throws IOException {
-        String line = new BufferedReader(new InputStreamReader(System.in)).readLine();
-        Integer parsed = safeParse(line).map(n -> n * 2).orElse(-1);
-        System.out.println(parsed.toString());
+        // Sort words by length. Comparator.comparingInt wants a function
+        // from String to int — pass it as a method reference.
+        // Then print each word on its own line with forEach and another
+        // method reference (note the `::`, not a `.`).
+        words.stream()
+            .sorted(Comparator.comparingInt(String::length))
+            .forEach(System.out::println);
     }
 }
