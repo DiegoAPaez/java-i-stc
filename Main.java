@@ -1,16 +1,13 @@
+import java.io.*;
+
 public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    record Person(String name, int age){}
+        long count = br.lines()
+            .filter(line -> !line.trim().isEmpty())
+            .count();
 
-    public static void main(String[] args) throws Exception {
-        String name;
-        int age;
-        try (java.util.Scanner sc = new java.util.Scanner(System.in)) {
-            name = sc.nextLine();
-            age = Integer.parseInt(sc.nextLine());
-        }
-        
-        Person p = new Person(name, age);
-        System.out.println(p.toString());
+        System.out.println(count);
     }
 }
